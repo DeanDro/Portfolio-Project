@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container">
+    <h1>Frequently Asked Questions</h1>
+    <br>
+    <div class="panel panel-default faq_panel">
+        <div class="panel-heading">
+            <h4>How can I find a bike route that fits my capabilities?</h4>
+        </div>
+        <div class="panel-body">
+            <p>All bike routes include information such as total distance, if it is kids friendly as well as a map of the route.</p>
+            <p>Visitors can search through the available routes to find the one that meets their criteria.</p>
+        </div>
+    </div>
+    <div class="panel panel-default faq_panel">
+        <div class="panel-heading">
+            <h4>Where are inforamtion about the cities and locations in my route are coming from?</h4>
+        </div>
+        <div class="panel-body">
+            <p>All cities and sites information in the page are extracted from Wikipedia by webscraping.</p>
+            <p>This site is utilizing Google Maps to create the map widget on the site and map the route.</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
