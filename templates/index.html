@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h1 class="title_name">Travel the world by bike!</h1>
+<br>
+<div class="container" id="main_page">
+    <div class="row">
+        <div class="col-md-6">
+            <a href="{{ url_for('mountainview')}}">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="https://s.hdnux.com/photos/23/65/41/5199953/5/rawImage.jpg" alt="mountain_bikers">
+                    <div class="card-body">
+                    <p class="card-text">Mountain View Trails</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-6">
+            <a href="{{ url_for('seaside')}}">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="http://res.cloudinary.com/simpleview/image/upload/v1617822277/clients/cannonbeachor/Biking_sardineandanchovy_a657c769-da38-4489-a4d9-7b7c6070de07.jpg" alt="seaside_bikers">
+                    <div class="card-body">
+                    <p class="card-text">Seaside Routes</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

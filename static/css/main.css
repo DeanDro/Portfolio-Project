@@ -1,0 +1,25 @@
+body{
+    background-color: white;
+    text-align: center;
+}
+
+#main_page{
+    display: block;
+}
+
+.img_graphs{
+    max-width: 100%;
+    height: auto;
+}
+
+.route_but{
+    margin-top: 2%;
+    max-width: fit-content;
+}
+
+.footer_bar{
+    align-items: center;
+    margin-left: 40%;
+    display: inline-flex;
+    color: black;
+}
