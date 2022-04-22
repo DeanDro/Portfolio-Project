@@ -19,8 +19,15 @@ body{
 
 .footer_bar{
     align-items: center;
-    margin-left: 40%;
+    width: 100%;
+    margin-top: 1%;
+    padding: 5px;
     display: inline-flex;
+    color: black;
+    background-color: rgb(204, 210, 219);
+}
+
+.footer_bar a{
     color: black;
 }
 
@@ -32,4 +39,18 @@ body{
 
 .faq_panel p{
     margin-bottom: 0%;
+}
+
+.category_description{
+    color: darkblue;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#left_column{
+    text-align: left;
+}
+
+#visited_cities{
+    text-align: left;
 }
