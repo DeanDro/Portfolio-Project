@@ -18,7 +18,7 @@ headers = {
 # Wikidata ids for cities in the list of options
 cities_dictionary = {
     'Genoa': 'Q1449',
-    'Monaco': 'Q55115',
+    'Monaco City': 'Q55115',
     'Barcelona': 'Q1492',
     'Valencia': 'Q8818',
     'Amsterdam': 'Q727',
@@ -53,3 +53,4 @@ def get_distance_between_cities(city1, city2):
     except :
         return ['An error occured in the calculation', 'An error occured in the calculation']
     
+print(get_distance_between_cities('Amsterdam', 'Genoa'))

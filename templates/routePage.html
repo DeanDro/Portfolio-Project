@@ -1,10 +1,21 @@
 {% extends 'base.html' %}
+{% block javascriptLibraries %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.14.1/css/ol.css" type="text/css">
+    <style>
+      .map {
+        height: 20em;
+        width: 50%;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.14.1/build/ol.js"></script>
+{% endblock %}
 
 {% block body %}
 <div class="container">
-    <h4>Biking Trip</h4>
+    <h4>Travel from {{city1_details}} to {{city2_details}}</h4>
+    <br>
     <div class="row">
-        <div class="col-md-2" id="left_column">
+        <div class="col-md-6" id="left_column">
             <p class="category_description">Details about your trip</p>
             <table id="details_table">
                 <tbody>
@@ -24,19 +35,51 @@
             <p class="city_name">{{ city }}</p>
             {% endfor %}
         </div>
-        <div class="col-md-10">
-            <img src='{{city1_img}}' alt="city image">
-            <p>{{city1_img}}</p>
+        <div class="col-md-6 map" id='map'>
+            <script type="text/javascript">
+              var map = new ol.Map({
+                target: 'map',
+                layers: [
+                  new ol.layer.Tile({
+                    source: new ol.source.OSM()
+                  })
+                ],
+                view: new ol.View({
+                  center: ol.proj.fromLonLat([7.416667, 43.733334]),
+                  zoom: 4
+                })
+              });
+            </script>
         </div>
     </div>
-    <div class="container">
-        <h5>Details about your stops</h5>
-        <div id="visited_cities">
-            <p>{{city1}}</p>
+    <br>
+    <div class="container-fluid">
+        <h5 id="picture_segment">Learn more about your stops</h5>
+        <div id="place_imgs">
+            <p style="font-size: 18px; font-weight: bold;">{{city1_details}}</p>
+            {% for c_img in city1_img %}
+            <img src='{{c_img}}' alt='{{city1_details}}' id="pic">
+            {% endfor %}
         </div>
-        <div id="visited_cities">
-            <p>{{city2}}</p>
+        <br>
+        <div id="visited_cities" class="card">
+            <div class="card-body">
+                <p>{{city1}}</p>
+            </div>
+        </div>
+        <div id="place_imgs">
+            <p style="font-size: 18px; font-weight: bold;">{{city2_details}}</p>
+            {% for c_img in city2_img %}
+            <img src='{{c_img}}' alt='{{city2_details}}' id="pic">
+            {% endfor %}
+        </div>
+        <br>
+        <div id="visited_cities" class="card">
+            <div class="card-body">
+                <p>{{city2}}</p>
+            </div>
         </div>
     </div>
 </div>
+<br>
 {% endblock %}
