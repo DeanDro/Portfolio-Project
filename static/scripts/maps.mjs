@@ -12,7 +12,9 @@ let cities_coord = {
     'Valencia': [-0.375000, 39.466667], 
     'Barcelona': [2.168365, 41.346176], 
     'Amsterdam': [4.897070, 52.377956],
-    'Dusseldorf': [6.783333, 51.233334]
+    'Dusseldorf': [6.783333, 51.233334],
+    'Hamburg': [9.993682, 53.551086],
+    'Copenhagen': [12.568337, 55.676098]
 };
 
 const key_loc = 'C:/Users/Konstantinos/Desktop/Oregon State University/CS 361/maps_token.txt';

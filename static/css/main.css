@@ -4,7 +4,7 @@ body{
 }
 
 #main_page{
-    display: block;
+    display: inline-flex;
 }
 
 .img_graphs{
@@ -85,4 +85,42 @@ body{
 
 #map{
     border: 3px solid darkblue;
+}
+
+#submitted_question{
+    text-align: left;
+}
+
+#returnHomePage{
+    background-color: darkred;
+    color: white;
+    text-align: center;
+    margin-left: 30%;
+    margin-right: 30%;
+    border-radius: 25px;
+}
+
+#ensure_return{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#yesButton{
+    color: white;
+    font-size: 18px;
+}
+
+#noButton{
+    color: white;
+    font-size: 18px;
+}
+
+#logo:hover{
+    background-color: blue;
+    cursor: pointer;
+}
+
+.discl{
+    text-align: left;
+    background-color: lightgray;
 }
