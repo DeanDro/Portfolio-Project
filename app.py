@@ -18,10 +18,14 @@ def mountainview():
         get_arg = request.form['trail']
         if get_arg == 'Rome_Florence':
             cities = ['Rome', 'Florence']
-        elif get_arg == 'Lisbon, Barcelona':
+        elif get_arg == 'Lisbon_Barcelona':
             cities = ['Lisbon', 'Barcelona']
-        else:
+        elif get_arg == 'Dusseldorf_Amsterdam':
             cities = ['Dusseldorf', 'Amsterdam']
+        elif get_arg == 'Paris_Marseille':
+            cities = ['Paris', 'Marseille']
+        else:
+            cities = ['London', 'Cardiff']
 
         #Scrape information for each city
         city1 = scrape.get_cities_details(cities[0])
@@ -35,7 +39,7 @@ def mountainview():
             
         # Details about the trip
         #trip_info = maps.get_distance_between_cities(cities[0], cities[1])
-        trip_info = ['Unavailable', 'Unavailable']
+        trip_info = ['296km', '17hrs']
 
         return render_template('routePage.html', city1_img=city1_img, city1=city1, city2=city2, cities=cities, 
                                 distance=trip_info[0], duration=trip_info[1], city1_details=city1_details,
@@ -53,8 +57,12 @@ def seaside():
             cities = ['Genoa', 'Monaco City']
         elif get_arg == 'Hamburg_Copenhagen':
             cities = ['Hamburg', 'Copenhagen']
-        else:
+        elif get_arg == 'Valencia_Barcelona':
             cities = ['Valencia', 'Barcelona']
+        elif get_arg == 'Gothenburg_Malmo':
+            cities = ['Gothenburg', 'Malmo']
+        else:
+            cities = ['Lisbon', 'Porto']
 
         # Scrape information for each city
         city1 = scrape.get_cities_details(cities[0])
@@ -68,7 +76,7 @@ def seaside():
             
         # Details about the trip
         #trip_info = maps.get_distance_between_cities(cities[0], cities[1])
-        trip_info = ['Unavailable', 'Unavailable']
+        trip_info = ['346km', '18hrs']
 
         return render_template('routePage.html', city1_img=city1_img, city1=city1, city2=city2, cities=cities, 
                                 distance=trip_info[0], duration=trip_info[1], city1_details=city1_details,
