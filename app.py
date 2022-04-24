@@ -5,6 +5,19 @@ import microservices.places_images as place_img
 
 app = Flask(__name__)
 
+routes_distance_duration = {
+    'Rome_Florence': ['296km', '17hrs'],
+    'Lisbon_Barcelona': ['1,277km', '66hrs'],
+    'Dusseldorf_Amsterdam' : ['225km', '12hrs'],
+    'Paris_Marseille': ['806km', '42hrs'],
+    'London_Cardiff': ['291km', '16hrs'],
+    'Nice_Montpellier': ['348km', '19hrs'],
+    'Hamburg_Copenhagen': ['336km', '18hrs'],
+    'Valencia_Barcelona': ['369km', '19hrs'],
+    'Gothenburg_Malmo': ['320km', '17hrs'],
+    'Lisbon_Porto': ['341km', '18hrs']
+}
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -39,7 +52,7 @@ def mountainview():
             
         # Details about the trip
         #trip_info = maps.get_distance_between_cities(cities[0], cities[1])
-        trip_info = ['296km', '17hrs']
+        trip_info = routes_distance_duration[get_arg]
 
         return render_template('routePage.html', city1_img=city1_img, city1=city1, city2=city2, cities=cities, 
                                 distance=trip_info[0], duration=trip_info[1], city1_details=city1_details,
@@ -53,8 +66,8 @@ def seaside():
 
         # Get path selection
         get_arg = request.form['trail']
-        if get_arg == 'Genoa_Monaco_City':
-            cities = ['Genoa', 'Monaco City']
+        if get_arg == 'Nice_Montpellier':
+            cities = ['Nice', 'Montpellier']
         elif get_arg == 'Hamburg_Copenhagen':
             cities = ['Hamburg', 'Copenhagen']
         elif get_arg == 'Valencia_Barcelona':
@@ -76,7 +89,7 @@ def seaside():
             
         # Details about the trip
         #trip_info = maps.get_distance_between_cities(cities[0], cities[1])
-        trip_info = ['346km', '18hrs']
+        trip_info = routes_distance_duration[get_arg]
 
         return render_template('routePage.html', city1_img=city1_img, city1=city1, city2=city2, cities=cities, 
                                 distance=trip_info[0], duration=trip_info[1], city1_details=city1_details,
