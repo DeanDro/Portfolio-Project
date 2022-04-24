@@ -11,7 +11,7 @@ routes_distance_duration = {
     'Dusseldorf_Amsterdam' : ['225km', '12hrs'],
     'Paris_Marseille': ['806km', '42hrs'],
     'London_Cardiff': ['291km', '16hrs'],
-    'Nice_Montpellier': ['348km', '19hrs'],
+    'Marseille_Montpellier': ['170km', '9hrs'],
     'Hamburg_Copenhagen': ['336km', '18hrs'],
     'Valencia_Barcelona': ['369km', '19hrs'],
     'Gothenburg_Malmo': ['320km', '17hrs'],
@@ -66,8 +66,8 @@ def seaside():
 
         # Get path selection
         get_arg = request.form['trail']
-        if get_arg == 'Nice_Montpellier':
-            cities = ['Nice', 'Montpellier']
+        if get_arg == 'Marseille_Montpellier':
+            cities = ['Marseille', 'Montpellier']
         elif get_arg == 'Hamburg_Copenhagen':
             cities = ['Hamburg', 'Copenhagen']
         elif get_arg == 'Valencia_Barcelona':

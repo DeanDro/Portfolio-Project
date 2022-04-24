@@ -11,12 +11,18 @@
 {% endblock %}
 
 {% block body %}
+<p style="text-align: left; margin-bottom: 2%; font-weight: bold;">
+    Click icon to restart your selection.
+</p>
 <div class="container">
     <h4>Travel from {{city1_details}} to {{city2_details}}</h4>
     <br>
     <div class="row">
         <div class="col-md-6" id="left_column">
             <p class="category_description">Details about your trip</p>
+            <p style="font-size: 12px; font-style: italic;">
+                Estimated calculations. Actual distance and duration could be different.
+            </p>
             <table id="details_table">
                 <tbody>
                     <tr>
@@ -51,6 +57,9 @@
               });
             </script>
         </div>
+        <p style="text-align: right; font-weight: bold;">
+            Look for additional stops in your path. 
+            <i style="color: red;">Note: Altering path could add time and km to your trail!</i></p>
     </div>
     <br>
     <div class="container-fluid">
