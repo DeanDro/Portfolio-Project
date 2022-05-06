@@ -56,7 +56,7 @@ def find_distance_destinations(city1, city2):
     """
 
     f = open('microservices/text_files/distance_scrap.txt', 'w')
-    query = str('distance+' + city1 +'+to+' + city2)
+    query = str(city1 +'-' + city2)
     f.write(query)
     f.close()
 
@@ -66,7 +66,7 @@ def find_distance_destinations(city1, city2):
     content = f.readline()
     f.close()
 
-    return content
+    return content.split('-')
 
 
 @app.route('/')
@@ -106,8 +106,7 @@ def mountainview():
             
         # Details about the trip
         #trip_info = maps.get_distance_between_cities(cities[0], cities[1])
-        trip_info = routes_distance_duration[get_arg]
-        trip_info[0] = distance
+        trip_info = distance
 
         return render_template('routePage.html', city1_img=city1_img, city1=city1, city2=city2, cities=cities, 
                                 distance=trip_info[0], duration=trip_info[1], city1_details=city1_details,
