@@ -1,6 +1,4 @@
 from flask import Flask, render_template, request
-import microservices.web_scraping as scrape
-import microservices.google_maps as maps
 import microservices.places_images as place_img
 import time
 
@@ -62,8 +60,13 @@ def find_distance_destinations(city1, city2):
 
     time.sleep(5)
 
-    f = open('microservices/text_files/distance_scrap.txt', 'r', encoding='utf8')
+    f = open('microservices/text_files/distance_result.txt', 'r', encoding='utf8')
     content = f.readline()
+    f.close()
+
+    time.sleep(2)
+    f = open('microservices/text_files/distance_result.txt', 'w')
+    f.write('')
     f.close()
 
     return content.split('-')
@@ -95,7 +98,7 @@ def mountainview():
         city1 = collect_wikipedia_data(cities[0])
         city2 = collect_wikipedia_data(cities[1])
 
-        #Call microservice google_scraper.py to get the distance between the two cities 
+        #Call microservice distance_api.py to get the distance between the two cities 
         distance = find_distance_destinations(cities[0], cities[1])
 
         # get image of the destinations - starting point
@@ -105,7 +108,6 @@ def mountainview():
         city2_details = cities[1]
             
         # Details about the trip
-        #trip_info = maps.get_distance_between_cities(cities[0], cities[1])
         trip_info = distance
 
         return render_template('routePage.html', city1_img=city1_img, city1=city1, city2=city2, cities=cities, 
@@ -140,10 +142,12 @@ def seaside():
         city1_details = cities[0]
         city2_img = place_img.get_image_location(cities[1])
         city2_details = cities[1]
+
+        # call microservice distance_api.py to get distance and duration of a ride
+        distance = find_distance_destinations(cities[0], cities[1])
             
         # Details about the trip
-        #trip_info = maps.get_distance_between_cities(cities[0], cities[1])
-        trip_info = routes_distance_duration[get_arg]
+        trip_info = distance
 
         return render_template('routePage.html', city1_img=city1_img, city1=city1, city2=city2, cities=cities, 
                                 distance=trip_info[0], duration=trip_info[1], city1_details=city1_details,

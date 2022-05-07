@@ -14,6 +14,7 @@ while distance_finder:
     content = f.readline()
     f.close()
 
+
     if content != '':
 
         cities = content.split('-')
@@ -43,7 +44,16 @@ while distance_finder:
             'Hamburg' : 'Q1055',
             'Copenhagen': 'Q1748',
             'Rome': 'Q220',
-            'Florence': 'Q2044'
+            'Florence': 'Q2044', 
+            'Lisbon': 'Q597', 
+            'Marseille' : 'Q23482',
+            'Montpellier': 'Q6441',
+            'Gothenburg': 'Q25287',
+            'Malmo': 'Q2211',
+            'Porto': 'Q33707919', 
+            'Paris': 'Q90',
+            'London': 'Q84',
+            'Cardiff': 'Q10690'
         }
 
         city1 = cities_dictionary[cities[0]]
@@ -63,8 +73,12 @@ while distance_finder:
         average_time = str(round(float((distance_km / 20)),2)) + ' hours'
         result = str(distance_km) + '-' + str(average_time)
         
-        p = open('./microservices/text_files/distance_scrap.txt', 'w')
+        p = open('./microservices/text_files/distance_result.txt', 'w')
         p.write(result)
-        time.sleep(4)
+        p.close()
+
+        time.sleep(2)
+
+        p = open('./microservices/text_files/distance_scrap.txt', 'w')
         p.write('')
         p.close()
