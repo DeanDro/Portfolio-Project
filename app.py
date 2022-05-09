@@ -71,9 +71,30 @@ def find_distance_destinations(city1, city2):
 
     return content.split('-')
 
+def quotes_request():
+    """
+    Sends a request to the microservice wikiquote and it returns a quote 
+    from the WikiQuote page.
+    """
+
+    f = open('microservices/text_files/quote.txt', 'w')
+    f.write('Quote')
+    f.close()
+
+    time.sleep(3)
+
+    f = open('microservices/text_files/quote.txt', 'r', encoding='utf8')
+    content = f.readlines()
+    f.close()
+
+    return content
 
 @app.route('/')
 def index():
+
+    # Get an inspirational quote on the homepage
+    quote = quotes_request()
+    
     return render_template('index.html')
 
 @app.route('/mountainview', methods=['GET', 'POST'])
