@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 import random
+import time
 
 search_quote = True
 
@@ -23,3 +24,13 @@ while search_quote:
         quote = quotes_list[rant]
 
         print(quote)
+        f = open('./microservices/text_files/quote_result.txt', 'w')
+        f.write(str(quote))
+        f.close()
+
+        time.sleep(2)
+
+        f = open('./microservices/text_files/quote.txt', 'w')
+        f.write('')
+        f.close()
+

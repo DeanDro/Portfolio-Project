@@ -83,7 +83,7 @@ def quotes_request():
 
     time.sleep(3)
 
-    f = open('microservices/text_files/quote.txt', 'r', encoding='utf8')
+    f = open('microservices/text_files/quote_result.txt', 'r', encoding='utf8')
     content = f.readlines()
     f.close()
 
