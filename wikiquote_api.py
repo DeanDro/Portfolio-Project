@@ -21,9 +21,8 @@ while search_quote:
         quotes_segment = quotes.find('div', class_='mw-parser-output')
         quotes_list = quotes_segment.find_all('li')
 
-        quote = quotes_list[rant]
-
-        print(quote)
+        quote = str(quotes_list[rant].text)
+        
         f = open('./microservices/text_files/quote_result.txt', 'w')
         f.write(str(quote))
         f.close()

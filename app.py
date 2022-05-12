@@ -4,18 +4,6 @@ import time
 
 app = Flask(__name__)
 
-routes_distance_duration = {
-    'Rome_Florence': ['296km', '17hrs'],
-    'Lisbon_Barcelona': ['1,277km', '66hrs'],
-    'Dusseldorf_Amsterdam' : ['225km', '12hrs'],
-    'Paris_Marseille': ['806km', '42hrs'],
-    'London_Cardiff': ['291km', '16hrs'],
-    'Marseille_Montpellier': ['170km', '9hrs'],
-    'Hamburg_Copenhagen': ['336km', '18hrs'],
-    'Valencia_Barcelona': ['369km', '19hrs'],
-    'Gothenburg_Malmo': ['320km', '17hrs'],
-    'Lisbon_Porto': ['341km', '18hrs']
-}
 
 def collect_wikipedia_data(keyword):
     """
@@ -87,7 +75,38 @@ def quotes_request():
     content = f.readlines()
     f.close()
 
-    return content
+    return str(content[0])
+
+def sort_list(destinations_list):
+    """
+    This is the method to run the microservice created by Nicolas Fong for sorting a 
+    list of strings.
+    """
+
+    # Write the list to be sorted in the data.txt file
+    p = open('./Microservice_Nicolas_Fong/data.txt', 'w')
+    
+    for i in range(len(destinations_list)):
+        p.write(destinations_list[i])
+        p.write('\n')
+    p.close()
+
+    f = open('./Microservice_Nicolas_Fong/commands.txt', 'w')
+    f.write('sort')
+    f.close()
+
+    # wait for the list to sort
+    time.sleep(5)
+
+    # Collect sorted list
+    sorted_list = []
+    with open('./Microservice_Nicolas_Fong/data.txt', 'r+') as f:
+        for line in f:
+            locations = line[:-1]
+            sorted_list.append(str(locations))
+    f.close()
+
+    return sorted_list
 
 @app.route('/')
 def index():
@@ -95,12 +114,17 @@ def index():
     # Get an inspirational quote on the homepage
     quote = quotes_request()
     
-    return render_template('index.html')
+    return render_template('index.html', quote=quote)
 
 @app.route('/mountainview', methods=['GET', 'POST'])
 def mountainview():
     if request.method == 'GET':
-        return render_template('mountainRoutes.html')
+
+        # Use Nicolas Fong microservice to sort the list of destinations in an alphabetical order.
+        destinations_list = ['Rome_Florence', 'Lisbon_Barcelona', 'Dusseldorf_Amsterdam', 'Paris_Marseille', 'London_Cardiff']
+        sorted_list = sort_list(destinations_list)
+
+        return render_template('mountainRoutes.html', destinations=sorted_list)
     else:
         # Get path selection
         get_arg = request.form['trail']
@@ -138,7 +162,12 @@ def mountainview():
 @app.route('/seaside', methods=['GET', 'POST'])
 def seaside():
     if request.method == 'GET':
-        return render_template('seasideRoutes.html')
+
+         # Use Nicolas Fong microservice to sort the list of destinations in an alphabetical order.
+        destinations_list = ['Marseille_Montpellier', 'Hamburg_Copenhagen', 'Valencia_Barcelona', 
+                            'Gothenburg_Malmo', 'Lisbon_Porto']
+        sorted_list = sort_list(destinations_list) 
+        return render_template('seasideRoutes.html', destinations=sorted_list)
     else:
 
         # Get path selection
