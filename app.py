@@ -46,7 +46,7 @@ def find_distance_destinations(city1, city2):
     f.write(query)
     f.close()
 
-    time.sleep(5)
+    time.sleep(5)  # Changed from 5 seconds before
 
     f = open('microservices/text_files/distance_result.txt', 'r', encoding='utf8')
     content = f.readline()
@@ -69,9 +69,9 @@ def quotes_request():
     f.write('Quote')
     f.close()
 
-    time.sleep(3)
+    time.sleep(2)
 
-    f = open('microservices/text_files/quote_result.txt', 'r', encoding='utf8')
+    f = open('microservices/text_files/quote_result.txt', 'r')
     content = f.readlines()
     f.close()
 
@@ -107,6 +107,23 @@ def sort_list(destinations_list):
     f.close()
 
     return sorted_list
+
+def get_image_url(city):
+    """
+    Uses microservice by Dan Shatil to returns the address of an image from pixabay. Get's a string with the location we want to
+    search for and searches for an image in Pixabay with that value.
+    """
+    f = open('Microservice_Dan_Shatil/image.txt', 'w')
+    f.write(city)
+    f.close()
+
+    time.sleep(1)
+
+    f = open('Microservice_Dan_Shatil/image.txt', 'r', encoding='utf8')
+    img_address = f.readlines()
+    f.close()
+
+    return img_address
 
 @app.route('/')
 def index():
@@ -147,13 +164,21 @@ def mountainview():
         distance = find_distance_destinations(cities[0], cities[1])
 
         # get image of the destinations - starting point
-        city1_img = place_img.get_image_location(cities[0])
+        #city1_img = place_img.get_image_location(cities[0])
+
+        # Use microservice by Dan Shatil to retrieve an image from Pixabay
+        city1_img = get_image_url(cities[0])
         city1_details = cities[0]
-        city2_img = place_img.get_image_location(cities[1])
+   
+        time.sleep(2)
+        #city2_img = place_img.get_image_location(cities[1])
+        city2_img = get_image_url(cities[1])
         city2_details = cities[1]
             
         # Details about the trip
         trip_info = distance
+
+        time.sleep(4)
 
         return render_template('routePage.html', city1_img=city1_img, city1=city1, city2=city2, cities=cities, 
                                 distance=trip_info[0], duration=trip_info[1], city1_details=city1_details,
