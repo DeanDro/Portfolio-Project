@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request
-import microservices.places_images as place_img
 import time
 
 app = Flask(__name__)
@@ -8,7 +7,7 @@ app = Flask(__name__)
 def collect_wikipedia_data(keyword):
     """
     Takes as a parameter a keyword string. Writes the keyword to webscraper.txt file for the webscraper to collect
-    and scrape WikiPedia for this keyword. The result will be written in the webscraper_result.txt file for this 
+    and scrape WikiPedia for this keyword. The result will be written in the webscraper_result.txt file for this
     function to collect and return.
     """
 
@@ -35,9 +34,9 @@ def collect_wikipedia_data(keyword):
 
 def find_distance_destinations(city1, city2):
     """
-    Gets two strings as parameters with the two locations we want to visit. It will format the query and write the text 
-    in the file distance_scrap.txt and wait for 5 sec. From there the google_scraper.py microservice will read the query and send a 
-    request to google to get the distance. Then it will write the result back to the distance_scrap.txt file, from which this 
+    Gets two strings as parameters with the two locations we want to visit. It will format the query and write the text
+    in the file distance_scrap.txt and wait for 5 sec. From there the google_scraper.py microservice will read the query and send a
+    request to google to get the distance. Then it will write the result back to the distance_scrap.txt file, from which this
     function will read the result.
     """
 
@@ -61,7 +60,7 @@ def find_distance_destinations(city1, city2):
 
 def quotes_request():
     """
-    Sends a request to the microservice wikiquote and it returns a quote 
+    Sends a request to the microservice wikiquote and it returns a quote
     from the WikiQuote page.
     """
 
@@ -79,13 +78,13 @@ def quotes_request():
 
 def sort_list(destinations_list):
     """
-    This is the method to run the microservice created by Nicolas Fong for sorting a 
+    This is the method to run the microservice created by Nicolas Fong for sorting a
     list of strings.
     """
 
     # Write the list to be sorted in the data.txt file
     p = open('./Microservice_Nicolas_Fong/data.txt', 'w')
-    
+
     for i in range(len(destinations_list)):
         p.write(destinations_list[i])
         p.write('\n')
@@ -130,7 +129,7 @@ def index():
 
     # Get an inspirational quote on the homepage
     quote = quotes_request()
-    
+
     return render_template('index.html', quote=quote)
 
 @app.route('/mountainview', methods=['GET', 'POST'])
@@ -160,27 +159,25 @@ def mountainview():
         city1 = collect_wikipedia_data(cities[0])
         city2 = collect_wikipedia_data(cities[1])
 
-        #Call microservice distance_api.py to get the distance between the two cities 
+        #Call microservice distance_api.py to get the distance between the two cities
         distance = find_distance_destinations(cities[0], cities[1])
-
-        # get image of the destinations - starting point
-        #city1_img = place_img.get_image_location(cities[0])
 
         # Use microservice by Dan Shatil to retrieve an image from Pixabay
         city1_img = get_image_url(cities[0])
         city1_details = cities[0]
-   
+
         time.sleep(2)
-        #city2_img = place_img.get_image_location(cities[1])
+
+        # Use microservice by Dan Shatil to retrieve an image from Pixabay
         city2_img = get_image_url(cities[1])
         city2_details = cities[1]
-            
+
         # Details about the trip
         trip_info = distance
 
         time.sleep(4)
 
-        return render_template('routePage.html', city1_img=city1_img, city1=city1, city2=city2, cities=cities, 
+        return render_template('routePage.html', city1_img=city1_img, city1=city1, city2=city2, cities=cities,
                                 distance=trip_info[0], duration=trip_info[1], city1_details=city1_details,
                                 city2_details=city2_details, city2_img=city2_img)
 
@@ -189,9 +186,9 @@ def seaside():
     if request.method == 'GET':
 
          # Use Nicolas Fong microservice to sort the list of destinations in an alphabetical order.
-        destinations_list = ['Marseille_Montpellier', 'Hamburg_Copenhagen', 'Valencia_Barcelona', 
+        destinations_list = ['Marseille_Montpellier', 'Hamburg_Copenhagen', 'Valencia_Barcelona',
                             'Gothenburg_Malmo', 'Lisbon_Porto']
-        sorted_list = sort_list(destinations_list) 
+        sorted_list = sort_list(destinations_list)
         return render_template('seasideRoutes.html', destinations=sorted_list)
     else:
 
@@ -212,19 +209,23 @@ def seaside():
         city1 = collect_wikipedia_data(cities[0])
         city2 = collect_wikipedia_data(cities[1])
 
-        # get image of the destinations - starting point
-        city1_img = place_img.get_image_location(cities[0])
+        # Use microservice by Dan Shatil to retrieve city images from Pixabay
+        city1_img = get_image_url(cities[0])
         city1_details = cities[0]
-        city2_img = place_img.get_image_location(cities[1])
+
+        time.sleep(2)
+
+        # Uses microservice by Dan Shatil to retrieve city images from Pixabay
+        city2_img = get_image_url(cities[1])
         city2_details = cities[1]
 
         # call microservice distance_api.py to get distance and duration of a ride
         distance = find_distance_destinations(cities[0], cities[1])
-            
+
         # Details about the trip
         trip_info = distance
 
-        return render_template('routePage.html', city1_img=city1_img, city1=city1, city2=city2, cities=cities, 
+        return render_template('routePage.html', city1_img=city1_img, city1=city1, city2=city2, cities=cities,
                                 distance=trip_info[0], duration=trip_info[1], city1_details=city1_details,
                                 city2_details=city2_details, city2_img=city2_img)
 

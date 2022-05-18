@@ -1,5 +1,5 @@
-Dusseldorf_Amsterdam
-Lisbon_Barcelona
-London_Cardiff
-Paris_Marseille
-Rome_Florence
+Gothenburg_Malmo
+Hamburg_Copenhagen
+Lisbon_Porto
+Marseille_Montpellier
+Valencia_Barcelona
