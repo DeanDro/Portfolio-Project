@@ -26,13 +26,51 @@
             <table id="details_table">
                 <tbody>
                     <tr>
-                        <td>Distance in km: </td>
+                        <td><b>Distance in km: </b></td>
                         <td>{{distance}}</td>
                     </tr>
                     <tr>
-                        <td>Duration:</td>
-                        <td>{{duration}}</td>
+                        <td><b>Duration (if travelling at avg. speed):</b></td>
+                        <td>{{duration}} hours</td>
                     </tr>
+                    <tr>
+                      <td><b>Avg. Speed km/h</b></td>
+                      <td>20 km/h</td>
+                    <tr>
+                      <td><b>Children Friendly:</b></td>
+                      {% if distance > 150 %}
+                        <td>
+                          <span style="color: red; font-weight: bold;"> No </span>
+                        </td>
+                      {% else %}
+                      <td>
+                        <span style="color: green; font-weight: bold;"> Yes </span>
+                      </td>
+                      {% endif %}
+                    </tr>
+                    <tr>
+                      <td><b>Difficulty:</b></td>
+                      {% if distance > 300 %}
+                        <td>
+                          <span style="color: red; font-weight: bold;"> Difficult </span>
+                        </td>
+                      {% elif 150 < distance < 300 %}
+                      <td>
+                        <span style="color: yellow; font-weight: bold;"> Moderate </span>
+                      </td>
+                      {% else %}
+                      <td>
+                          <span style="color: green; font-weight: bold;">Easy</span>
+                      </td>
+                      {% endif %}
+                    </tr>
+                    {% if distance > 300 %}
+                    <tr>
+                      <td>
+                        <span style="color: red; font-weight: bold;">Trip takes more than 1 day</span>
+                      </td>
+                    </tr>
+                    {% endif %}
                 </tbody>
             </table>
             <br>
@@ -40,6 +78,12 @@
             {% for city in cities %}
             <p class="city_name">{{ city }}</p>
             {% endfor %}
+            <p style="font-size: 16px; font-weight: bold; color: red;">
+              Emergency Numbers</p>
+            <p style="font-weight"><b>UK: </b><span>999</span></p>
+            <p style="font-weight"><b>Pan-EU Emergency Line:</b> <span>112</span></p>
+            <p style="font-weight"><b>Pan-EU includes:</b> Portugal, Italy, Germany, Netherlands,
+              Denmark, Sweden, France, Spain</p>
         </div>
         <div class="col-md-6 map" id='map'>
             <script type="text/javascript">
@@ -56,10 +100,11 @@
                 })
               });
             </script>
+            <p style="text-align: right; font-weight: bold;">
+                Look for additional stops in your path.
+                <i style="color: red;">Note: Altering path could add time and km to your trail!</i>
+            </p>
         </div>
-        <p style="text-align: right; font-weight: bold;">
-            Look for additional stops in your path. 
-            <i style="color: red;">Note: Altering path could add time and km to your trail!</i></p>
     </div>
     <br>
     <div class="container-fluid">

@@ -124,6 +124,18 @@ def get_image_url(city):
 
     return img_address
 
+def convert_time_distance(distance_details):
+    """
+    Helper method that takes the distance and the time it will take to
+    complete the route, converts it from string to float and returns the
+    revised array.
+    """
+    new_array = []
+    new_array.append(float(distance_details[0]))
+    new_array.append(float(distance_details[1]))
+
+    return new_array
+
 @app.route('/')
 def index():
 
@@ -173,7 +185,7 @@ def mountainview():
         city2_details = cities[1]
 
         # Details about the trip
-        trip_info = distance
+        trip_info = convert_time_distance(distance)
 
         time.sleep(4)
 
@@ -223,7 +235,7 @@ def seaside():
         distance = find_distance_destinations(cities[0], cities[1])
 
         # Details about the trip
-        trip_info = distance
+        trip_info = convert_time_distance(distance)
 
         return render_template('routePage.html', city1_img=city1_img, city1=city1, city2=city2, cities=cities,
                                 distance=trip_info[0], duration=trip_info[1], city1_details=city1_details,

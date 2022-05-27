@@ -19,7 +19,7 @@ while distance_finder:
 
         cities = content.split('-')
 
-        # URL for getting distance between endpoints 
+        # URL for getting distance between endpoints
         distance_url = 'https://wft-geo-db.p.rapidapi.com/v1/geo/cities/Q60/distance'
 
         # Login Key
@@ -44,13 +44,13 @@ while distance_finder:
             'Hamburg' : 'Q1055',
             'Copenhagen': 'Q1748',
             'Rome': 'Q220',
-            'Florence': 'Q2044', 
-            'Lisbon': 'Q597', 
+            'Florence': 'Q2044',
+            'Lisbon': 'Q597',
             'Marseille' : 'Q23482',
             'Montpellier': 'Q6441',
             'Gothenburg': 'Q25287',
             'Malmo': 'Q2211',
-            'Porto': 'Q33707919', 
+            'Porto': 'Q33707919',
             'Paris': 'Q90',
             'London': 'Q84',
             'Cardiff': 'Q10690'
@@ -68,11 +68,11 @@ while distance_finder:
         querystring2 = {"distanceUnit":"KM","toCityId":city2}
         response2 = json.loads(requests.request("GET", distance_url, headers=headers, params=querystring2).text)
         distance2 = response2.get('data')
-        
+
         distance_km = round(abs(float(str(distance1)) - float(str(distance2))),2)
-        average_time = str(round(float((distance_km / 20)),2)) + ' hours'
+        average_time = str(round(float((distance_km / 20)),2))
         result = str(distance_km) + '-' + str(average_time)
-        
+
         p = open('./microservices/text_files/distance_result.txt', 'w')
         p.write(result)
         p.close()
