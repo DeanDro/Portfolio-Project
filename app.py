@@ -45,7 +45,7 @@ def find_distance_destinations(city1, city2):
     f.write(query)
     f.close()
 
-    time.sleep(5)  # Changed from 5 seconds before
+    time.sleep(5)
 
     f = open('microservices/text_files/distance_result.txt', 'r', encoding='utf8')
     content = f.readline()
@@ -136,6 +136,7 @@ def convert_time_distance(distance_details):
 
     return new_array
 
+# Route to the main page
 @app.route('/')
 def index():
 
@@ -144,6 +145,7 @@ def index():
 
     return render_template('index.html', quote=quote)
 
+# Route for mountainview options
 @app.route('/mountainview', methods=['GET', 'POST'])
 def mountainview():
     if request.method == 'GET':
@@ -193,6 +195,7 @@ def mountainview():
                                 distance=trip_info[0], duration=trip_info[1], city1_details=city1_details,
                                 city2_details=city2_details, city2_img=city2_img)
 
+# Route for seaside routes
 @app.route('/seaside', methods=['GET', 'POST'])
 def seaside():
     if request.method == 'GET':
@@ -241,10 +244,12 @@ def seaside():
                                 distance=trip_info[0], duration=trip_info[1], city1_details=city1_details,
                                 city2_details=city2_details, city2_img=city2_img)
 
+# route for frequently asked questions page
 @app.route('/faq')
 def faq():
     return render_template('faq.html')
 
+# route for content disclosure page.
 @app.route('/disclosure')
 def disclosure():
     return render_template('disclosure.html')

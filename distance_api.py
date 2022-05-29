@@ -59,16 +59,20 @@ while distance_finder:
         city1 = cities_dictionary[cities[0]]
         city2 = cities_dictionary[cities[1]]
 
+        # Make a reqeuest to geo-db API for the location of the first city
         querystring1 = {"distanceUnit":"KM","toCityId":city1}
         response1 = json.loads(requests.request("GET", distance_url, headers=headers, params=querystring1).text)
         distance1 = response1.get('data')
 
-        time.sleep(2)
+        time.sleep(2) # Wait for 2sec due to cap on API requests per sec
 
+        # Make a request to geo-db API for the second city
         querystring2 = {"distanceUnit":"KM","toCityId":city2}
         response2 = json.loads(requests.request("GET", distance_url, headers=headers, params=querystring2).text)
         distance2 = response2.get('data')
 
+        # Calculate the distance between the 2 cities and estimated time.
+        # Average speed used for time calculation: 20km/h
         distance_km = round(abs(float(str(distance1)) - float(str(distance2))),2)
         average_time = str(round(float((distance_km / 20)),2))
         result = str(distance_km) + '-' + str(average_time)
